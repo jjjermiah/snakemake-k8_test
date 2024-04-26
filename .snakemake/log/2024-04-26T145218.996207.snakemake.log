@@ -1,0 +1,73 @@
+Building DAG of jobs...
+shared_storage_local_copies: False
+remote_exec: False
+Unable to retrieve additional files from git. This is not a git repository.
+Uploading source archive to storage provider...
+Checking status of 0 jobs
+Using snakemake/snakemake:v8.10.8 for Kubernetes jobs.
+Using shell: /bin/bash
+Provided remote nodes: 5
+Job stats:
+job         count
+--------  -------
+all             1
+get_file        1
+total           2
+
+Resources before job selection: {'_cores': 9223372036854775807, '_nodes': 5}
+Ready jobs (1)
+Select jobs to execute...
+Using greedy selector because only single job has to be scheduled.
+Selected jobs (1)
+Resources after job selection: {'_cores': 9223372036854775806, '_nodes': 4}
+Execute 1 jobs...
+
+[Fri Apr 26 14:52:20 2024]
+rule get_file:
+    input: https://example-files.online-convert.com/document/txt/example.txt (retrieve from storage)
+    output: gs://orcestradata/snakemake8_test/results/summary.txt (send to storage)
+    jobid: 1
+    reason: Forced execution
+    resources: tmpdir=<TBD>
+
+General args: ['--force', '--target-files-omit-workdir-adjustment', '--keep-storage-local-copies', '--max-inventory-time 0', '--nocolor', '--notemp', '--no-hooks', '--nolock', '--ignore-incomplete', '', '--verbose ', '--rerun-triggers code software-env input mtime params', '', '', '', '--conda-frontend mamba', '', '', '', '', '', '--shared-fs-usage none', '', '--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/', '', '', '', '', '', '--latency-wait 5', '--scheduler ilp', '--local-storage-prefix .snakemake/storage', '', '', '', '', '', '--storage-gcs-retries 5', '--storage-http-allow-redirects True', '', '', '--default-storage-prefix gs://orcestradata/snakemake8_test --default-storage-provider gcs', '--default-resources base64//dG1wZGlyPXN5c3RlbV90bXBkaXI=']
+Executing job: pip install --target '.snakemake/pip-deployments' snakemake-storage-plugin-gcs snakemake-storage-plugin-http && python -m snakemake --deploy-sources gs://orcestradata/snakemake8_test/snakemake-workflow-sources.5b3e15dff71e7269568f13ef6205ecc8c5539e45d857e6e4a9abb4a5b3a7a413.tar.xz 5b3e15dff71e7269568f13ef6205ecc8c5539e45d857e6e4a9abb4a5b3a7a413 --default-storage-prefix gs://orcestradata/snakemake8_test --default-storage-provider gcs   --storage-gcs-retries 5 --storage-http-allow-redirects True && python -m snakemake --snakefile Snakefile --target-jobs 'get_file:' --allowed-rules 'get_file' --cores 1 --attempt 1 --force-use-threads   --force --target-files-omit-workdir-adjustment --keep-storage-local-copies --max-inventory-time 0 --nocolor --notemp --no-hooks --nolock --ignore-incomplete --verbose  --rerun-triggers code software-env input mtime params --conda-frontend mamba --shared-fs-usage none --wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ --latency-wait 5 --scheduler ilp --local-storage-prefix .snakemake/storage --storage-gcs-retries 5 --storage-http-allow-redirects True --default-storage-prefix gs://orcestradata/snakemake8_test --default-storage-provider gcs --default-resources base64//dG1wZGlyPXN5c3RlbV90bXBkaXI= --mode remote
+job resources:  {'_cores': 1, '_nodes': 1, 'tmpdir': '<TBD>'}
+k8s pod resources: {'cpu': '950m'}
+Get status with:
+kubectl describe pod snakejob-a59290ba-1abb-5e32-9d29-966e49d60d06
+kubectl logs snakejob-a59290ba-1abb-5e32-9d29-966e49d60d06
+Checking status of 1 jobs
+Checking status of 1 jobs
+[Fri Apr 26 14:52:40 2024]
+Error in rule get_file:
+    message: For details, please issue:
+kubectl describe pod snakejob-a59290ba-1abb-5e32-9d29-966e49d60d06
+kubectl logs snakejob-a59290ba-1abb-5e32-9d29-966e49d60d06For further error details see the cluster/cloud log and the log files of the involved rule(s).
+    jobid: 1
+    input: https://example-files.online-convert.com/document/txt/example.txt (retrieve from storage)
+    output: gs://orcestradata/snakemake8_test/results/summary.txt (send to storage)
+    log: /var/folders/8t/rwh6rzg93jxfqkb63gt2n4940000gn/T/snakemakegtmcub3h/persistence/auxiliary/kubernetes-logs/snakejob-a59290ba-1abb-5e32-9d29-966e49d60d06.log (check log file(s) for error details)
+    shell:
+        cat .snakemake/storage/HTTP/example-files.online-convert.com/document/txt/example.txt > .snakemake/storage/gcs/orcestradata/snakemake8_test/results/summary.txt
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    external_jobid: snakejob-a59290ba-1abb-5e32-9d29-966e49d60d06
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-04-26T145218.996207.snakemake.log
+unlocking
+removing lock
+removing lock
+removed all locks
+Full Traceback (most recent call last):
+  File "/Users/bhklab/Documents/GitHub/snakemake_playground/snakemake-kubernetesissue/.pixi/envs/default/lib/python3.12/site-packages/snakemake/cli.py", line 2068, in args_to_api
+    dag_api.execute_workflow(
+  File "/Users/bhklab/Documents/GitHub/snakemake_playground/snakemake-kubernetesissue/.pixi/envs/default/lib/python3.12/site-packages/snakemake/api.py", line 589, in execute_workflow
+    workflow.execute(
+  File "/Users/bhklab/Documents/GitHub/snakemake_playground/snakemake-kubernetesissue/.pixi/envs/default/lib/python3.12/site-packages/snakemake/workflow.py", line 1285, in execute
+    raise WorkflowError("At least one job did not complete successfully.")
+snakemake_interface_common.exceptions.WorkflowError: At least one job did not complete successfully.
+
+WorkflowError:
+At least one job did not complete successfully.
