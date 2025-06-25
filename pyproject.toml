@@ -14,10 +14,12 @@ platforms = ["osx-arm64"]
 
 [tool.pixi.tasks]
 snake = "snakemake -c1"
+# uses the default/config.yaml for CLI arguments
+snake-gcp = "snakemake --workflow-profile default"
 
 [tool.pixi.dependencies]
-snakemake = ">=8.10.8,<8.11"
-snakemake-storage-plugin-gcs = ">=0.1.4,<0.2"
-snakemake-storage-plugin-http = ">=0.2.3,<0.3"
-snakemake-executor-plugin-kubernetes = ">=0.1.5,<0.2"
-pdbpp = ">=0.10.3,<0.11"
+snakemake = ">=9.6.2,<10"
+snakemake-storage-plugin-gcs = ">=1.1.4,<2"
+snakemake-storage-plugin-http = ">=0.3.0,<0.4"
+snakemake-executor-plugin-kubernetes = ">=0.4.2,<0.5"
+pdbpp = ">=0.11.6,<0.12"
